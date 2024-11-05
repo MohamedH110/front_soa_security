@@ -1,0 +1,35 @@
+<div class="container">
+    <div>
+        <h2>Ajouter un Produit :</h2>
+    </div>
+    <form (ngSubmit)="addeleve()" #eleveForm="ngForm">
+        <div  hidden class="col-sm-2 col-md-2 col-lg-2">
+            <label>ID Eleve</label>
+            <input type="text" [(ngModel)]="newEleve.id" name="id" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Nom Eleve</label>
+            <input type="text" [(ngModel)]="newEleve.nom" name="nom" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Age Eleve</label>
+            <input type="number" [(ngModel)]="newEleve.age" name="age" class="form-control">
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Classe Eleve</label>
+            <input type="text" [(ngModel)]="newEleve.classe" name="classe" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>ecoles</label>
+            <select class="form-control form-control-lg" id="idCat" name="idCat" [(ngModel)]="newIdEco">
+                <option *ngFor="let cat of ecoles" [value]="cat.id">
+                    {{cat.nom}}
+                </option>
+            </select>
+        </div> 
+        <div class="mt-2">
+            <button type="submit" class="btn btn-success" [disabled]="!eleveForm.valid">Ajouter</button>
+        </div>
+       
+    </form>
+</div>

@@ -1,0 +1,7 @@
+button.btn-primary {
+    margin-top: 10px; /* Ajuste la hauteur pour correspondre à celle de l'input */
+  }
+  
+  input{
+    width: 500px;
+  }

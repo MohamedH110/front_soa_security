@@ -1,0 +1,35 @@
+<div class="container">
+    <div>
+        <h2>Modifier un Eleve :</h2>
+    </div>
+    <form (ngSubmit)="updateeleve()" #eleveForm="ngForm">
+        <div hidden class="col-sm-2 col-md-2 col-lg-2">
+            <label>ID Eleve</label>
+            <input type="text" [(ngModel)]="currentEleve.id" name="id" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Nom Eleve</label>
+            <input type="text" [(ngModel)]="currentEleve.nom" name="nom" class="form-control" required>
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Age Eleve</label>
+            <input type="number" [(ngModel)]="currentEleve.age" name="ageeleve" class="form-control" required>
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2">
+            <label>Classe Eleve</label>
+            <input type="text" [(ngModel)]="currentEleve.classe" name="classe" class="form-control">
+        </div>
+        <div class="col-sm-4 col-md-4 col-lg-4">
+            <label>Ecole</label>
+            <select class="form-control form-control-lg" id="id" name="idCat" [(ngModel)]="updatedECoId">
+                <option *ngFor="let eco of ecoles" [value]="eco.id">
+                    {{eco.nom}}
+                </option>  
+            </select>
+        </div>
+    
+        <div class="mt-2">
+            <button type="submit" class="btn btn-success" [disabled]="!eleveForm.valid">Modifier</button>
+        </div>
+    </form>
+</div>

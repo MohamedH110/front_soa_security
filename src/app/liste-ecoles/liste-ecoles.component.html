@@ -1,0 +1,31 @@
+<div class="container">
+
+    <div class="col-sm-4 col-md-4 col-lg-4 mb-4"> 
+        <app-updateecole 
+          (ecoleUpdated)="ecoleUpdated($event)" 
+           [ecole]="updatedEco" 
+            [ajout]="ajout">
+    </app-updateecole>
+    </div>
+ 
+
+
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                    <tr> <th>Id</th><th>Nom ecole</th><th>Adresse ecole</th></tr>
+                </thead>
+                <tbody *ngFor="let cat of ecoles">
+                    <tr>
+                        <td>{{cat.id}}</td>
+                        <td>{{cat.nom}}</td>
+                        <td>{{cat.adresse}}</td>
+                        <td><a class="btn btn-success"  (click)="updateEco(cat)">Editer</a></td>
+                        <td><a class="btn btn-danger" (click)="supprimerEcole(cat)">Supprimer</a></td>  
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,74 @@
+<div class="container mt-4">
+    <!-- Formulaire de recherche -->
+    <form class="form-inline mb-4">
+      <div class="form-group mr-2">
+        <label for="nomProduit" class="mr-2">Nom Élève</label>
+        <input
+          id="nomProduit"
+          type="text"
+          class="form-control"
+          placeholder="Rechercher un élève"
+          [(ngModel)]="nomeleve"
+          name="nomeleve"
+        />
+      </div>
+      <button type="submit" (click)="rechercherEleves()" class="btn btn-primary align-self-center">Rechercher</button>
+    </form>
+  
+
+   <!--  <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+        <label>Nom eleve en tapant</label>
+        <input class="form-control" #searchTerm (keyup)="onKeyUp(searchTerm.value)">
+        </div>
+     </form> -->
+
+
+
+      <!--  <form class="form-inline">
+        <div class="form-group mx-sm-3 mb-2 mt-2 ">
+        <label>Nom Eleve</label>
+        <input type="text" class="form-control" [(ngModel)]="nomeleve" name="nomProduit" class="form-control">
+        <button type="submit" (click)="rechercherEleves()" class="btn btn-primary mb-2 ml-2">Rechercher</button>
+        </div>
+    </form> -->
+
+    <!-- Liste des élèves -->
+    <div class="card shadow mb-4">
+      <div class="card-header">
+        <h3 class="mb-0">Liste des élèves</h3>
+      </div>
+      <div class="card-body p-0">
+        <table class="table table-hover table-striped mb-0">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Âge</th>
+              <th scope="col">Classe</th>
+              <th scope="col">École</th>
+              <!-- Uncomment these if needed -->
+              <!-- <th scope="col">Actions</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let eleve of eleves">
+              <td>{{ eleve.id }}</td>
+              <td>{{ eleve.nom }}</td>
+              <td>{{ eleve.age }}</td>
+              <td>{{ eleve.classe }}</td>
+              <td>{{ eleve.ecole.nom }}</td>
+              <!-- Uncomment these if needed -->
+              
+              <td *ngIf="authService.isAdmin()">
+                <button class="btn btn-success btn-sm" [routerLink]="['/updateeleve', eleve.id]">Modifier</button>
+                <button class="btn btn-danger btn-sm" (click)="supprimereleve(eleve)">Supprimer</button>
+              </td>
+            
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  

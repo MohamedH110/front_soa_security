@@ -1,0 +1,22 @@
+
+
+<form>
+    <div [hidden]="ajout"  >
+        <label>ID Ecole</label>
+        <input type="text" [(ngModel)]="ecole.id" name="id" class="form-control w-25" readonly>
+    </div>
+    <div>
+        <label>Nom Ecole</label>
+        <input type="text" [(ngModel)]="ecole.nom" name="nom" class="form-control" placeholder="Entrez un nom de l ecole...">
+    </div>
+    <div>
+        <label>Adresse Ecole</label>
+        <input type="text" [(ngModel)]="ecole.adresse" name="adresse" class="form-control" placeholder="Entrez l adresse  de l ecole...">
+    </div>
+    
+    <div class="mt-2">
+        <button type="submit" [disabled]="!ecole.nom" class="btn btn-success"
+            (click)="saveEcole()" >{{ajout ? 'Ajouter' : 'Modifier'}}
+        </button>
+    </div>
+</form>

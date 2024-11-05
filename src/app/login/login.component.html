@@ -1,0 +1,30 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <!-- Alert box with dynamic error message -->
+            <div *ngIf="err == 1" class="alert alert-danger text-center">
+                <strong>Login ou mot de passe erronés.</strong>
+            </div>
+
+            <!-- Login form -->
+            <form>
+                <!-- Username field with form-floating for better UX -->
+                <div class="form-floating mb-3">
+                    <input type="text" id="username" name="username" class="form-control" [(ngModel)]="user.username" placeholder="Nom Utilisateur" autocomplete="off">
+                    <label for="username">Nom Utilisateur</label>
+                </div>
+
+                <!-- Password field with form-floating for better UX -->
+                <div class="form-floating mb-3">
+                    <input type="password" id="password" name="password" class="form-control" [(ngModel)]="user.password" placeholder="Mot de passe" autocomplete="off">
+                    <label for="password">Mot de passe</label>
+                </div>
+
+                <!-- Submit button with full width for mobile responsiveness -->
+                <div class="d-grid">
+                    <button type="button" (click)="onLoggedin()" class="btn btn-success btn-lg">Connexion</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
