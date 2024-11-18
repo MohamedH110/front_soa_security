@@ -7,20 +7,24 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class tokenInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService) {}
+  private toExclude: string[] = ["/login", "/register"];
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-
-    const toExclude = "/login";
-   //tester s'il sagit de login, on n'ajoute pas le header Authorization puisqu'on a 
-   //pas encode de JWT (il est null)
-    if(request.url.search(toExclude) === -1){
-       let jwt = this.authService.getToken();
-       let reqWithToken = request.clone( {
-    setHeaders: { Authorization : "Bearer "+jwt}
-    })
-    return next.handle(reqWithToken);
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // Check if the current request URL matches any of the excluded routes
+    if (this.toExclude.some(route => req.url.includes(route))) {
+      return next.handle(req); // Don't add Authorization header if route is excluded
     }
-    return next.handle(request);
+
+    // Otherwise, add the Authorization header if the token exists
+    const token = localStorage.getItem('jwt');
+    if (token) {
+      req = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+    }
+
+    return next.handle(req);
   }
 }

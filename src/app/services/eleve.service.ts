@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { eleve } from '../model/eleve.model';
 import { Ecole } from '../model/ecole.model';
-import { Observable } from 'rxjs';
+import { Image } from '../model/Image.model';
+import { map, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ecolewarpper } from '../model/ecolewarpper';
 import { AuthService } from './auth.service';
@@ -165,5 +166,45 @@ export class EleveService {
               }
           */
     
+
+
+              uploadImage(file: File, filename: string): Observable<Image>{
+                const imageFormData = new FormData();
+                imageFormData.append('image', file, filename);
+                const url = `${this.apiURL + '/image/upload'}`;
+                return this.http.post<Image>(url, imageFormData);
+                }
+        
+        
+                loadImage(id: number): Observable<Image> {
+                  const url = `${this.apiURL + '/image/get/info'}/${id}`;
+                  return this.http.get<Image>(url);
+                  }
+
+
+                 uploadImageFS(file: File, filename: string, idProd : number): Observable<any>{
+                    const imageFormData = new FormData();
+                    imageFormData.append('image', file, filename);
+                    const url = `${this.apiURL + '/image/uploadFS'}/${idProd}`;
+                    return this.http.post(url, imageFormData);
+                  }
+                  
+                  
+                supprimerImage(id : number) {
+                    const url = `${this.apiURL}/image/delete/${id}`;
+                    return this.http.delete(url, httpOptions);
+                    }
+                    
+                    uploadImageEleve(file: File, filename: string, idProd:number): Observable<any>{
+                      const imageFormData = new FormData();
+                      imageFormData.append('image', file, filename);
+                      const url = `${this.apiURL + '/image/uplaodImageEleve'}/${idProd}`;
+                      return this.http.post(url, imageFormData);
+                   }
+
+
+
+                  
 }
+
 

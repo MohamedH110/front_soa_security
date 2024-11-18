@@ -10,6 +10,7 @@
                         <th>Age</th>
                         <th>Classe</th>
                         <th>ecole</th>
+                        <th>Image</th>
                        
                     </tr>
                 </thead>
@@ -20,6 +21,8 @@
                         <td>{{eleve.age}}</td>
                         <td>{{eleve.classe}}</td>
                         <td>{{eleve.ecole.nom}}</td>
+                        <td><img class="card-img-top img-responsive" src = "{{eleve.imageStr}}" style = "height :50px;width:100px"></td>
+                        
                         <td><a *ngIf="authService.isAdmin()"
                             class="btn btn-success" [routerLink]="['/updateeleve',eleve.id]">Modifier</a></td>
                         <td><a *ngIf="authService.isAdmin()"

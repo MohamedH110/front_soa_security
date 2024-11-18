@@ -3,7 +3,7 @@
         <div class="col-md-6 col-lg-4">
             <!-- Alert box with dynamic error message -->
             <div *ngIf="err == 1" class="alert alert-danger text-center">
-                <strong>Login ou mot de passe erronés.</strong>
+                <strong>{{message}}</strong>
             </div>
 
             <!-- Login form -->
@@ -19,7 +19,7 @@
                     <input type="password" id="password" name="password" class="form-control" [(ngModel)]="user.password" placeholder="Mot de passe" autocomplete="off">
                     <label for="password">Mot de passe</label>
                 </div>
-
+                <p>Vous n'avez pas un compte? <a routerLink="/register">S'inscrire </a></p>
                 <!-- Submit button with full width for mobile responsiveness -->
                 <div class="d-grid">
                     <button type="button" (click)="onLoggedin()" class="btn btn-success btn-lg">Connexion</button>

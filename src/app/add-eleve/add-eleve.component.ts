@@ -15,6 +15,9 @@ export class AddEleveComponent implements OnInit {
   newEcole!: Ecole;
   ecoles!: Ecole[];
   newIdEco!: number;
+  uploadedImage!: File;
+  imagePath: any;
+
 
   constructor(private eleveService: EleveService, private router: Router) { }
 
@@ -28,12 +31,35 @@ export class AddEleveComponent implements OnInit {
   }
 
   
-  addeleve(){
+  /*addeleve(){
     this.newEleve.ecole = this.ecoles.find(cat => cat.id == this.newIdEco)!;
     this.eleveService.ajoutereleve(this.newEleve)
                       .subscribe(prod => {
                       console.log(prod);
                       this.router.navigate(['eleves']);
                       }); 
+    }*/
+
+
+    addeleve() {
+      this.newEleve.ecole = this.ecoles.find(cat => cat.id == this.newIdEco)!;
+      this.eleveService
+        .ajoutereleve(this.newEleve)
+        .subscribe((prod) => {
+          this.eleveService
+            . uploadImageEleve(this.uploadedImage,
+              this.uploadedImage.name, prod.id)
+            .subscribe((response: any) => { }
+            );
+          this.router.navigate(['eleves']);
+        });
     }
+
+
+    onImageUpload(event: any) {
+      this.uploadedImage = event.target.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(this.uploadedImage);
+      reader.onload = (_event) => { this.imagePath = reader.result; }
+      }
 }

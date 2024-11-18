@@ -20,7 +20,9 @@ export class AuthService {
   public loggedUser!:string;
   public isloggedIn: Boolean = false;
   public roles!:string[];
+  public regitredUser : User = new User();
 
+  
 
 
   constructor(private router : Router,private http : HttpClient) { }
@@ -92,8 +94,10 @@ export class AuthService {
     this.isloggedIn = false;
     this.loggedUser = undefined!;
     this.roles = undefined!;
+    this.token=undefined!;
     localStorage.removeItem('loggedUser');
     localStorage.setItem('isloggedIn', String(this.isloggedIn));
+    localStorage.removeItem('jwt');
     this.router.navigate(['/login']);
   }
 
@@ -115,4 +119,20 @@ export class AuthService {
     return  this.helper.isTokenExpired(this.token);   
   }
 
+  registerUser(user :User){
+    localStorage.removeItem('jwt'); 
+    return this.http.post<User>(this.apiURL+'/register', user,{observe:'response'});
+    }
+
+    setRegistredUser(user : User){
+      this.regitredUser=user;
+      }
+      
+      getRegistredUser(){
+      return this.regitredUser;
+      }
+
+      validateEmail(code : string){
+        return this.http.get<User>(this.apiURL+'/verifyEmail/'+code);
+        }
 }

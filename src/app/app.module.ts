@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ElevesComponent } from './eleves/eleves.component';
@@ -16,6 +16,10 @@ import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { tokenInterceptor } from './services/token.interceptor';
+import { RegisterComponent } from './register/register.component';
+import { VerifEmailComponent } from './verif-email/verif-email.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -29,13 +33,18 @@ import { tokenInterceptor } from './services/token.interceptor';
     ListeEcolesComponent,
     UpdateecoleComponent,
     LoginComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    RegisterComponent,
+    VerifEmailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     
   ],
   providers: [
@@ -43,9 +52,7 @@ import { tokenInterceptor } from './services/token.interceptor';
     provideHttpClient(
       withFetch() // Enable fetch API
     ),
-    { provide : HTTP_INTERCEPTORS,
-      useClass : tokenInterceptor ,
-      multi : true}
+    { provide : HTTP_INTERCEPTORS,useClass : tokenInterceptor ,multi : true}
   ],
   bootstrap: [AppComponent]
 })

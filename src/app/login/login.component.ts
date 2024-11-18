@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
   err: number = 0;
   user = new User();
-
+  message : string ="login ou mot de passe erronés..";
   
 
   constructor(private authService: AuthService, private router: Router) { }
@@ -30,7 +30,11 @@ export class LoginComponent implements OnInit {
            this.router.navigate(['/']); 
         },
         error: (err: any) => {
-        this.err = 1; 
+          this.err = 1; 
+          if (err.error.errorCause=="disabled")
+            this.message = "L'utilisateur est désactivé !";
+
+       
         }
         });
         
